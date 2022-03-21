@@ -6,3 +6,6 @@ __pycache__
 
 # Logs
 *.log
+
+# Sensory detector specific
+*.rcsensor.txt
