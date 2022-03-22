@@ -2,6 +2,7 @@ import itertools
 import pathlib
 import randomfiletree
 
+
 def callback(target_dir: pathlib.Path) -> pathlib.Path:
     sourcedir = pathlib.Path("./templates")
     sources = []
@@ -9,13 +10,14 @@ def callback(target_dir: pathlib.Path) -> pathlib.Path:
         with open(srcfile, 'rb') as f:
             content = f.read()
         sources.append((srcfile.suffix, content))
-    
+
     for srcfile in itertools.cycle(sources):
         random_string = randomfiletree.core.random_string()
         path = target_dir / (random_string + srcfile[0])
         with path.open('wb') as f:
             f.write(srcfile[1] + random_string.encode())
         yield path
+
 
 # nfiles: file creation probability
 # nfolders: directory creation probability
