@@ -19,7 +19,8 @@ class SensoryFile:
         f = open(f"{self.file_path}", "r")
         content = f.read()
         f.close()
-
+        self.logger.info(f"Checked {self.file_path}")
+        # print(f"check {self.file_path}")
         if content == SENSORY_FILE_CONTENTS:
             return
         else:

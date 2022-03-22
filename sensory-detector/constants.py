@@ -10,3 +10,6 @@ DEFAULT_SENSOR_FILE_NAME = ".rcsensor.txt"
 
 # Configuration files
 CONFIG_FILE_PATH = "./config.yml"
+
+# Logging constants
+MAX_LOG_FILES_TO_KEEP = 10
