@@ -1,5 +1,7 @@
 # Rescate Tance
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/6de634a20ef1f5e51810/maintainability)](https://codeclimate.com/github/omar2535/Rescate-tance/maintainability)
+
 A POC ransomware detector for CMPT733 project
 
 ## ⚒ Setup
@@ -25,3 +27,7 @@ source .env/bin/activate
 ```sh
 (.env) pre-commit install
 ```
+
+## 📁 Folder structure
+- **io-detector**: Detects ranosmware by looking at high file I/O
+- **sensory-detector:** Detects ransomware by creating sensor files
