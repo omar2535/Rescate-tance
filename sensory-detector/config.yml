@@ -1,3 +1,4 @@
 directories_to_check:
   - /home/omar2535/school/Rescate-tance/sensory-detector
   - /home/omar2535/school/Rescate-tance/
+frequency_to_check: 1 # in seconds
