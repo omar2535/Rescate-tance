@@ -1,9 +1,16 @@
-from modules.CustomLogger import CustomLogger
+import os
+import sys
+
+# To fix path to import from upper files
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+from general_utils.CustomLogger import CustomLogger
+from general_utils.log_utils import do_rollover
 from modules.SensoryFile import SensoryFile
 from constants import CONFIG_FILE_PATH, DEFAULT_LOG_FILE, MAX_LOG_FILES_TO_KEEP
 from utils.file_utils import get_list_of_sensor_paths
 from utils.RepeatedTimer import RepeatedTimer
-from utils.log_utils import do_rollover
 
 from typing import List
 import yaml
