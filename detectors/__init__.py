@@ -1,3 +1,5 @@
 from .SensoryDetector import SensoryDetector
 
-detectors = [SensoryDetector]
+available_detectors = {
+    "SensoryDetector": SensoryDetector
+}
