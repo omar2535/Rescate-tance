@@ -1,9 +1,10 @@
 from general_utils.CustomLogger import CustomLogger
 from general_utils.log_utils import do_rollover
-from modules.SensoryFile import SensoryFile
+from sensory_detector.modules.SensoryFile import SensoryFile
 from constants import CONFIG_FILE_PATH, DEFAULT_LOG_FILE, MAX_LOG_FILES_TO_KEEP
-from utils.file_utils import get_list_of_sensor_paths
-from utils.RepeatedTimer import RepeatedTimer
+from sensory_detector.utils.file_utils import get_list_of_sensor_paths
+from sensory_detector.utils.RepeatedTimer import RepeatedTimer
+from detectors.Detector import Detector
 
 from typing import List
 import yaml
@@ -20,11 +21,11 @@ class SensoryDetector(Detector):
         logger = custom_logger.get_logger()
         
         """Setup signal"""
-        signal.signal(signal.SIGINT, shutdown)
+        signal.signal(signal.SIGINT, SensoryDetector.shutdown)
     
     def run(self):
         pass
     
     
-    def shutdown(self):
+    def shutdown():
         pass

@@ -8,3 +8,13 @@ class Detector:
 
     def run(self):
         raise Exception("Overwrite me!")
+
+    def __str__(self):
+        """For print override
+        """
+        return self.__class__.__name__
+
+    def __repr__(self):
+        """For interactive prompt override
+        """
+        return self

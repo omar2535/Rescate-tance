@@ -3,6 +3,7 @@ import pathlib
 
 # Program specific constants
 SENSORY_FILE_CONTENTS = "rescate-tance"
+DESCRIPTION = "A collection of proof-of-concept ransomware detectors"
 
 # General constants
 DEFAULT_LOG_FILE = str(pathlib.Path(__file__).parent.resolve()) + "/logs/main.log"
