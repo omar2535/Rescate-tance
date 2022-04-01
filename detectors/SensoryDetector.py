@@ -25,7 +25,3 @@ class SensoryDetector(Detector):
     
     def run(self):
         pass
-    
-    
-    def shutdown():
-        pass
