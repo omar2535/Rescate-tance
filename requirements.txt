@@ -1,13 +1,17 @@
 cfgv==3.3.1
 distlib==0.3.4
 filelock==3.6.0
+flake8==4.0.1
 identify==2.4.12
+mccabe==0.6.1
 nodeenv==1.6.0
 numpy==1.22.3
 pandas==1.4.1
 pathlib==1.0.1
 platformdirs==2.5.1
 pre-commit==2.17.0
+pycodestyle==2.8.0
+pyflakes==2.4.0
 python-dateutil==2.8.2
 pytz==2022.1
 PyYAML==6.0
