@@ -1,7 +1,7 @@
 # Sensory file class
 
 from constants import SENSORY_FILE_CONTENTS
-from .CustomLogger import CustomLogger
+from general_utils.CustomLogger import CustomLogger
 import os
 
 
