@@ -28,10 +28,10 @@ class IOChecker:
         # []]
 
         # process data (all in K/s)
-        total_disk_read = float(lines[0][3])
-        total_disk_write = float(lines[0][9])
-        current_disk_read = float(lines[1][3])
-        current_disk_write = float(lines[1][9])
+        # total_disk_read = float(lines[0][3])
+        # total_disk_write = float(lines[0][9])
+        # current_disk_read = float(lines[1][3])
+        # current_disk_write = float(lines[1][9])
         suspicious_processes = []
         if len(lines[3]) > 0:
             for i in range(3, len(lines) - 1):
