@@ -13,7 +13,7 @@ class IOChecker:
 
     def check(self) -> List:
         # print('Suspicious Processes:')
-        
+
         stats = subprocess.run(self.command, stdout=subprocess.PIPE, input=self.sudo_pass, encoding='ascii')
 
         # split output
@@ -42,4 +42,3 @@ class IOChecker:
                     suspicious_processes.append(process)
         # print(pd.DataFrame(suspicious_processes), flush=True)
         return suspicious_processes
-        

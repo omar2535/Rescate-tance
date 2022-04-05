@@ -16,7 +16,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 def main(threshold, interval) -> None:
     sudo_pass = getpass('Password: ')
-    io_detector = IOChecker(threshold=threshold,sudo_pass = sudo_pass)
+    io_detector = IOChecker(threshold=threshold, sudo_pass=sudo_pass)
     while True:
         print(io_detector.check())
         time.sleep(interval)
