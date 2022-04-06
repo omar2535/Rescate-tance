@@ -28,6 +28,28 @@ source .env/bin/activate
 (.env) pre-commit install
 ```
 
+## 🔧 Usage
+
+Using the program to run detectors can be done like so:
+
+```sh
+python3 main.py -d <DetectorName>
+```
+
+and for a full menu of command line options, run:
+
+```sh
+python3 main.py -h
+```
+
 ## 📁 Folder structure
+
 - **io-detector**: Detects ranosmware by looking at high file I/O
 - **sensory-detector:** Detects ransomware by creating sensor files
+- **detectors:** Where all the detector classes are kept as a single point of control
+
+## 🕵️‍♀️ Adding a new detector
+
+1. First, make a new folder if there are utilities for this detector in the root directory.
+2. Afterwards, create a `<NameHere>Detector.py` file in `detectors/` and define the `run(self, ...)` function!
+3. Lastly, add the detector class name in `detectors/__init__.py` to allow the detector to be called from the main program!
