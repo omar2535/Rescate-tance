@@ -15,17 +15,17 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 
 def main(threshold, interval) -> None:
-    sudo_pass = getpass('Password: ')
+    sudo_pass = getpass("Password: ")
     io_detector = IOChecker(threshold=threshold, sudo_pass=sudo_pass)
     while True:
-        print(io_detector.check())
+        print(io_detector.get_suspicious_processes())
         time.sleep(interval)
 
 
 if __name__ == "__main__":
     print("(+) Starting Rescate-tance io detector!")
     # TODO: change this part!
-    threshold = {'DISK_READ': 0, 'DISK_WRITE': 0, 'SWAPIN%': 0, 'IO%': 0}
+    threshold = {"DISK_READ": 0, "DISK_WRITE": 0, "SWAPIN%": 0, "IO%": 0}
     interval = 5
 
     """Call main"""
