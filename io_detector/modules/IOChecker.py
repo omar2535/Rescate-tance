@@ -11,13 +11,13 @@ class IOChecker:
         self.command = shlex.split("sudo -S iotop -obPk -n 1")
         self.sudo_pass = sudo_pass
 
-    def check(self) -> List:
+    def get_suspicious_processes(self) -> List:
         # print('Suspicious Processes:')
 
-        stats = subprocess.run(self.command, stdout=subprocess.PIPE, input=self.sudo_pass, encoding='ascii')
+        stats = subprocess.run(self.command, stdout=subprocess.PIPE, input=self.sudo_pass, encoding="ascii")
 
         # split output
-        lines = stats.stdout.split('\n')
+        lines = stats.stdout.split("\n")
         for i in range(len(lines)):
             lines[i] = lines[i].split()
 
@@ -35,10 +35,27 @@ class IOChecker:
         suspicious_processes = []
         if len(lines[3]) > 0:
             for i in range(3, len(lines) - 1):
-                process = {'PID': lines[i][0], 'PRIO': lines[i][1], 'USER': lines[i][2], 'DISK_READ': float(lines[i][3]), 'DISK_WRITE': float(
-                    lines[i][5]), 'SWAPIN%': float(lines[i][7]), 'IO%': float(lines[i][9]), 'COMMAND': ' '.join(lines[i][11:])}
+                process = {
+                    "PID": lines[i][0],
+                    "PRIO": lines[i][1],
+                    "USER": lines[i][2],
+                    "DISK_READ": float(lines[i][3]),
+                    "DISK_WRITE": float(lines[i][5]),
+                    "SWAPIN%": float(lines[i][7]),
+                    "IO%": float(lines[i][9]),
+                    "COMMAND": " ".join(lines[i][11:]),
+                }
                 # TODO: add more filters
-                if process['DISK_WRITE'] > self.threshold['DISK_WRITE']:
+                if process["DISK_WRITE"] > self.threshold["DISK_WRITE"]:
                     suspicious_processes.append(process)
         # print(pd.DataFrame(suspicious_processes), flush=True)
         return suspicious_processes
+
+    def get_iotop_processes(self):
+        stats = subprocess.run(self.command, stdout=subprocess.PIPE, input=self.sudo_pass, encoding="ascii")
+
+        # split output
+        lines = stats.stdout.split("\n")
+        for i in range(len(lines)):
+            lines[i] = lines[i].split()
+        breakpoint()
