@@ -25,7 +25,7 @@ def test():
     6. If the detector raises an exception, stop RAASnet and time how long it took and what percentage of files were encrypted
     """
 
-    """1. Clone the RAASNET repository"""
+    """1. Clone the RAASNET repository & install dependencies"""
     try:
         subprocess.check_output(["git", "clone", "https://github.com/leonv024/RAASNet.git", f"{FILE_PATH}/RAASNet"])
     except Exception:
@@ -42,6 +42,7 @@ def test():
         print("(+) Can't install RAASNet pip dependencies")
 
     """2. Create a bunch of dummy folders and dummy files"""
+    print("(+) Creating dummy files")
     randomfiletree.core.iterative_gaussian_tree(
         f"{FILE_PATH}/test_folder", nfiles=5, nfolders=5, maxdepth=3, repeat=4, payload=generate_random_files
     )

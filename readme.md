@@ -53,3 +53,17 @@ python3 main.py -h
 1. First, make a new folder if there are utilities for this detector in the root directory.
 2. Afterwards, create a `<NameHere>Detector.py` file in `detectors/` and define the `run(self, ...)` function!
 3. Lastly, add the detector class name in `detectors/__init__.py` to allow the detector to be called from the main program!
+
+## 🧪 Tests
+
+To run tests, run:
+
+```sh
+python tester.py
+```
+
+currently, this only runs the tests in `tests/raasnet_test.py`
+
+## ⚠ WARNING
+
+**DO NOT RUN THE PAYLOADS IN `tests/ransomware/` DIRECTLY!!**. You will brick your computer and cause all your files to be encrypted!
