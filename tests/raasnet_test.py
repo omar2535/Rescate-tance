@@ -17,7 +17,7 @@ def test():
 
     The script will perform the following steps:
 
-    1. Clone the RAASNET repository
+    1. Clone the RAASNET repository & install dependencies
     2. Create a bunch of dummy folders and dummy files
     3. Configure RAASNET to do ransomware only on the specified dummy folders & files
     4. Run the detector
@@ -30,6 +30,16 @@ def test():
         subprocess.check_output(["git", "clone", "https://github.com/leonv024/RAASNet.git", f"{FILE_PATH}/RAASNet"])
     except Exception:
         print("(+) Couldn't clone the RAASNET repository")
+
+    try:
+        os.system("sudo apt install python3-tk python3-pil python3-pil.imagetk libgeoip1 libgeoip-dev geoip-bin")
+    except Exception:
+        print("(+) Couldn't install linux apt packages")
+
+    try:
+        subprocess.check_output(["pip3", "install", "-r", f"{FILE_PATH}/RAASNet/requirements.txt"])
+    except Exception:
+        print("(+) Can't install RAASNet pip dependencies")
 
     """2. Create a bunch of dummy folders and dummy files"""
     randomfiletree.core.iterative_gaussian_tree(
