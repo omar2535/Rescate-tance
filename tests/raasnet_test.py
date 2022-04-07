@@ -19,10 +19,9 @@ def test():
 
     1. Clone the RAASNET repository & install dependencies
     2. Create a bunch of dummy folders and dummy files
-    3. Configure RAASNET to do ransomware only on the specified dummy folders & files
-    4. Run the detector
-    5. Run RAASNET
-    6. If the detector raises an exception, stop RAASnet and time how long it took and what percentage of files were encrypted
+    3. Run the detector (`python3 main.py -d <detector>`)
+    4. Run RAASNET (`python3 tests/ransomware/raasnet_payload.py`)
+    5. If the detector raises an exception, stop RAASnet and time how long it took and what percentage of files were encrypted
     """
 
     """1. Clone the RAASNET repository & install dependencies"""
@@ -32,7 +31,9 @@ def test():
         print("(+) Couldn't clone the RAASNET repository")
 
     try:
-        os.system("sudo apt install python3-tk python3-pil python3-pil.imagetk libgeoip1 libgeoip-dev geoip-bin")
+        os.system(
+            "sudo apt install python3-pip python3-tk python3-pil python3-pil.imagetk libgeoip1 libgeoip-dev geoip-bin"
+        )
     except Exception:
         print("(+) Couldn't install linux apt packages")
 
@@ -46,5 +47,3 @@ def test():
     randomfiletree.core.iterative_gaussian_tree(
         f"{FILE_PATH}/test_folder", nfiles=5, nfolders=5, maxdepth=3, repeat=4, payload=generate_random_files
     )
-
-    """3. Configure RAASNET to do ransomware only on the specified dummy folders & files"""
