@@ -9,3 +9,7 @@ __pycache__
 
 # Sensory detector specific
 *.rcsensor.txt
+
+# Test folder generations
+test_folder/
+RAASNET/
