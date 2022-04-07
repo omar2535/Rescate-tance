@@ -62,7 +62,6 @@ class SensoryDetector(Detector):
             check_frequency = config["frequency_to_check"]
             rt = RepeatedTimer(check_frequency, sensor_file.check)
             self.repeated_timers.append(rt)
-            pass
 
         """ Infinite loop """
         while True:
