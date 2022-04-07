@@ -12,3 +12,17 @@ RandomFileTree==1.2.0
 requests==2.27.1
 six==1.16.0
 urllib3==1.26.9
+
+# For raasnet
+numpy==1.19.3
+pymsgbox
+pyaes
+pyotp
+pypng
+pyqrcode
+pycryptodome
+pyinstaller
+requests
+python-geoip-python3
+python-geoip-geolite2
+pillow
