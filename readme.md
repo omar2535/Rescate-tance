@@ -47,6 +47,7 @@ python3 main.py -h
 - **io-detector**: Detects ranosmware by looking at high file I/O
 - **sensory-detector:** Detects ransomware by creating sensor files
 - **detectors:** Where all the detector classes are kept as a single point of control
+- **tests:** Test scripts. Can be invoked via the `tester.py` in the root directory
 
 ## 🕵️‍♀️ Adding a new detector
 
