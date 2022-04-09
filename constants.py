@@ -10,7 +10,7 @@ DEFAULT_LOG_FILE = str(pathlib.Path(__file__).parent.resolve()) + "/logs/main.lo
 DEFAULT_SENSOR_FILE_NAME = ".rcsensor.txt"
 
 # Configuration files
-CONFIG_FILE_PATH = "./config.yml"
+CONFIG_FILE_PATH = str(pathlib.Path(__file__).parent.resolve()) + "/config.yml"
 
 # Logging constants
 MAX_LOG_FILES_TO_KEEP = 10

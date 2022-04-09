@@ -40,5 +40,5 @@ def test():
     """2. Create a bunch of dummy folders and dummy files"""
     print("(+) Creating dummy files")
     randomfiletree.core.iterative_gaussian_tree(
-        f"{FILE_PATH}/test_folder", nfiles=5, nfolders=5, maxdepth=3, repeat=4, payload=generate_random_files
+        f"{FILE_PATH}/test_folder", nfiles=2, nfolders=2, maxdepth=2, repeat=2, payload=generate_random_files
     )

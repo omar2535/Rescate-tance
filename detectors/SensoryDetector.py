@@ -2,7 +2,7 @@ from general_utils.CustomLogger import CustomLogger
 from general_utils.log_utils import do_rollover
 from sensory_detector.modules.SensoryFile import SensoryFile
 from constants import CONFIG_FILE_PATH, DEFAULT_LOG_FILE, MAX_LOG_FILES_TO_KEEP
-from sensory_detector.utils.file_utils import get_list_of_sensor_paths
+from sensory_detector.utils.file_utils import get_list_of_sensor_paths, get_list_of_sensor_paths_recursive
 from sensory_detector.utils.RepeatedTimer import RepeatedTimer
 from detectors.Detector import Detector
 
@@ -23,8 +23,7 @@ class SensoryDetector(Detector):
 
         """Setup logger"""
         do_rollover(MAX_LOG_FILES_TO_KEEP, DEFAULT_LOG_FILE)
-        self.custom_logger = CustomLogger(__name__)
-        self.logger = self.custom_logger.get_logger()
+        self.logger = CustomLogger(__name__).get_logger()
 
         def shutdown(signum, frame) -> None:
             """Deletes sensor files and stops timers"""
@@ -49,11 +48,11 @@ class SensoryDetector(Detector):
         config_file_stream = open(CONFIG_FILE_PATH, "r")
         config = yaml.safe_load(config_file_stream)
         dir_paths = config["directories_to_check"]
-        file_paths = get_list_of_sensor_paths(dir_paths)
+        file_paths = get_list_of_sensor_paths_recursive(dir_paths)
 
         """ Create sensor files """
         for file_path in file_paths:
-            sensor_file = SensoryFile(file_path)
+            sensor_file = SensoryFile(file_path, logger=self.logger)
             sensor_file.create()
             self.sensor_files.append(sensor_file)
 

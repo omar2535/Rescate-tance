@@ -6,8 +6,8 @@ import os
 
 
 class SensoryFile:
-    def __init__(self, file_path):
-        self.logger = CustomLogger(__name__).get_logger()
+    def __init__(self, file_path, logger: CustomLogger):
+        self.logger = logger
         self.file_path = file_path
 
     def check(self) -> bool:
@@ -16,10 +16,10 @@ class SensoryFile:
         Returns:
             bool: _description_
         """
-        f = open(f"{self.file_path}", "r")
-        content = f.read()
-        f.close()
-        self.logger.info(f"Checked {self.file_path}")
+        with open(f"{self.file_path}", "r") as f:
+            content = f.read()
+            f.close()
+        # self.logger.info(f"Checked {self.file_path}")
         # print(f"check {self.file_path}")
         if content == SENSORY_FILE_CONTENTS:
             return
@@ -29,17 +29,19 @@ class SensoryFile:
     def create(self):
         """Create sensor file"""
         try:
-            f = open(f"{self.file_path}", "x")
-            f.write(SENSORY_FILE_CONTENTS)
-            f.close()
-            self.logger.info(f"Sensory file {self.file_path} created")
+            with open(f"{self.file_path}", "x") as f:
+                f.write(SENSORY_FILE_CONTENTS)
+                f.close()
+            # self.logger.info(f"Sensory file {self.file_path} created")
         except FileExistsError:
-            self.logger.warning(f"Creating file '{self.file_path}' already exists")
+            # self.logger.warning(f"Creating file '{self.file_path}' already exists")
+            pass
 
     def delete(self):
         """Delete sensor file"""
         if os.path.exists(self.file_path):
             os.remove(self.file_path)
-            self.logger.info(f"Sensory file {self.file_path} deleted")
+            # self.logger.info(f"Sensory file {self.file_path} deleted")
         else:
-            self.logger.warning(f"Delete file '{self.file_path}' doesn't exist!")
+            # self.logger.warning(f"Delete file '{self.file_path}' doesn't exist!")
+            pass
