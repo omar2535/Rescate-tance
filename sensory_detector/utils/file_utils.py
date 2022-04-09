@@ -1,3 +1,4 @@
+import os
 from typing import List
 from constants import DEFAULT_SENSOR_FILE_NAME
 
@@ -27,4 +28,20 @@ def get_list_of_sensor_paths(dir_paths: List[str]) -> List[str]:
     file_path_list = []
     for directory in dir_paths:
         file_path_list.append(f"{directory.rstrip('//')}/{DEFAULT_SENSOR_FILE_NAME}")
+    return file_path_list
+
+
+def get_list_of_sensor_paths_recursive(dir_paths: List[str]) -> List[str]:
+    """Generates list of sensor paths in every folder and subfolder
+
+    Args:
+        dir_paths (List[str]): List of directory paths to recursively crawl through
+
+    Returns:
+        List[str]: List of sensor file paths
+    """
+    file_path_list = []
+    for directory in dir_paths:
+        for sub_dir_obj in os.walk(directory):
+            file_path_list.append(f"{sub_dir_obj[0].rstrip('//')}/{DEFAULT_SENSOR_FILE_NAME}")
     return file_path_list
