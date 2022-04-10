@@ -27,14 +27,6 @@ def cleanup_test_folder():
 def test():
     """
     This script will be responsible to benchmarking our program (Rescate-tance) detector VS RAASNET
-
-    The script will perform the following steps:
-
-    0. Cleanup the test_folder
-    2. Create a bunch of dummy folders and dummy files
-    3. Run the detector (`python3 main.py -d <detector>`)
-    4. Run RAASNET (`python3 tests/ransomware/raasnet_payload.py`)
-    5. If the detector raises an exception, stop RAASnet and time how long it took and what percentage of files were encrypted
     """
 
     """0. Clean up test folder"""
@@ -57,7 +49,6 @@ def test():
     """3. Run the detector"""
     os.chdir(f"{FILE_PATH}/../")
     detector_proc = subprocess.Popen(["sudo", "python3", "main.py", "-d", DETECTOR_TO_TEST], shell=False)
-    # os.system(f"sudo python3 main.py -d {DETECTOR_TO_TEST}")
 
     print("(test) Sleeping a bit for ransomware detector to start up!")
     time.sleep(5)
@@ -82,5 +73,5 @@ def test():
     metrics = compute_ransomware_encryption_metrics(original_files, after_ransomware_files)
     pp.pprint(metrics)
 
-    """"5. Cleanup test folder again"""
+    """7. Cleanup test folder again"""
     cleanup_test_folder()
