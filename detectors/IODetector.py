@@ -14,7 +14,7 @@ class IODetector(Detector):
         # TODO Parse threshold and interval
         self.threshold = {"DISK_READ": 0, "DISK_WRITE": 0, "SWAPIN%": 0, "IO%": 0}
         self.interval = 5
-        self.sudo_pass = None  # getpass('Password: ')
+        self.sudo_pass = getpass("Enter root password: ")
         self.io_checker = IOChecker(threshold=self.threshold, sudo_pass=self.sudo_pass)
 
     def run(self):

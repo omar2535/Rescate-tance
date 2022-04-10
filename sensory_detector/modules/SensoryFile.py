@@ -2,6 +2,8 @@
 
 from constants import SENSORY_FILE_CONTENTS
 from general_utils.CustomLogger import CustomLogger
+
+import psutil
 import os
 
 
@@ -29,8 +31,8 @@ class SensoryFile:
             else:
                 raise Exception("File was changed!")
         except Exception:
-            # TODO: Change this to a handler once change is detected!
-            os.system("pkill -9 python")
+            # TODO: Change to general purpose handler (right now, only specific to RAASNET)
+            os.system("pkill -9 -f raasnet_payload.py")
             pass
 
     def create(self):

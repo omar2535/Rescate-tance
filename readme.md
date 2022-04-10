@@ -4,6 +4,16 @@
 
 A POC ransomware detector for CMPT733 project
 
+## 🔮 Requirements
+
+- Python3.5+
+
+and some other requirements here:
+
+```sh
+sudo apt install iotop python3-pip python3-tk python3-pil python3-pil.imagetk libgeoip1 libgeoip-dev geoip-bin
+```
+
 ## ⚒ Setup
 
 **Setting up the environment:**

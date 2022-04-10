@@ -13,3 +13,5 @@ __pycache__
 # Test folder generations
 test_folder/
 RAASNET/
+
+keys.txt

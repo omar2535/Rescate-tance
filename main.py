@@ -7,10 +7,6 @@ from constants import DESCRIPTION
 from detectors import available_detectors
 from post_detection.terminator import terminate
 
-"""Need root privileges to do checking!"""
-if not os.geteuid() == 0:
-    sys.exit("(+) Only root can run this script")
-
 """Get list of detectors"""
 list_of_detectors: List[str] = list(available_detectors.keys())
 
