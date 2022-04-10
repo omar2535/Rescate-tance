@@ -7,6 +7,7 @@ from sensory_detector.utils.RepeatedTimer import RepeatedTimer
 from detectors.Detector import Detector
 
 from typing import List
+from multiprocessing import Pool
 import yaml
 import time
 import threading
@@ -63,16 +64,10 @@ class SensoryDetector(Detector):
             sensor_file.create()
             self.sensor_files.append(sensor_file)
 
-        """ Register timers to check sensor files """
-        # for sensor_file in self.sensor_files:
-        #     check_frequency = config["frequency_to_check"]
-        #     rt = RepeatedTimer(check_frequency, sensor_file.check)
-        #     self.repeated_timers.append(rt)
-
         print("(+) Sensory detector up & running!")
 
-        """ Infinite loop """
+        """ Infinite loop, use thread pool to check sensor files """
         while True:
-            for sensor_file in self.sensor_files:
-                sensor_file.check()
+            with Pool(10) as p:
+                p.map(SensoryFile.check, self.sensor_files)
             time.sleep(config["frequency_to_check"])
