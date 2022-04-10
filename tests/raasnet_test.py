@@ -86,7 +86,10 @@ def test():
     """6: Get files after ransomware hit and check percentage encrypted"""
     after_ransomware_files = get_all_files_in_directory_recursively(f"{FILE_PATH}/test_folder")
     metrics = compute_ransomware_encryption_metrics(original_files, after_ransomware_files)
+
+    print("------- Test Results ---------")
     pp.pprint(metrics)
+    print("------------------------------")
 
     """7. Cleanup test folder again"""
     cleanup_test_folder()
