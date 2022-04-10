@@ -12,7 +12,7 @@ from file_generator.generate_random_file_tree import generate_random_files
 from .test_utils.file_utils import get_all_files_in_directory_recursively
 from .test_utils.metrics import compute_ransomware_encryption_metrics
 
-pp = pprint.PrettyPrinter(indent=4)
+pp = pprint.PrettyPrinter(indent=2)
 FILE_PATH = os.path.abspath(os.path.dirname(__file__))
 DETECTOR_TO_TEST = "SensoryDetector"
 
