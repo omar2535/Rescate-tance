@@ -4,9 +4,12 @@ from constants import SENSORY_FILE_CONTENTS
 from general_utils.CustomLogger import CustomLogger
 from post_detection.handlers import post_detection_handler
 
+import threading
 import logging
 import psutil
 import os
+
+exit_event = threading.Event()
 
 
 class SensoryFile:
@@ -20,6 +23,9 @@ class SensoryFile:
         Returns:
             bool: _description_
         """
+        if exit_event.is_set():
+            return
+
         try:
             if not os.path.exists(self.file_path):
                 raise Exception("File was deleted or changed!")

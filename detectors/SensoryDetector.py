@@ -13,6 +13,8 @@ import threading
 import signal
 import logging
 
+exit_event = threading.Event()
+
 
 class SensoryDetector(Detector):
     def __init__(self):
@@ -26,6 +28,9 @@ class SensoryDetector(Detector):
         self.logger = CustomLogger(__name__).get_logger()
 
         def shutdown(signum, frame) -> None:
+            """Set exit event for all threads"""
+            exit_event.set()
+
             """Deletes sensor files and stops timers"""
             for rt in self.repeated_timers:
                 rt.stop()
