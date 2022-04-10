@@ -60,3 +60,6 @@ def test():
 
     """4. Run the ransomware"""
     raasnet_proc = subprocess.Popen(f"sudo python3 tests/ransomware/raasnet_payload.py")
+    
+    # TODO: Kill detector & ransomware only so we can keep metrics in this script
+    # Generate a file tree of previous, then for each file in previous file tree, check percentage of encryption
