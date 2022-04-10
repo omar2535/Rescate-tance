@@ -86,6 +86,8 @@ This command will run the test in `tests/raasnet_test.py`. The test includes:
 
 A sample run is shown below:
 
+![raasnet-test-results](./docs/raasnet_test_results.png)
+
 ## ⚠ WARNING
 
 **DO NOT RUN THE PAYLOADS IN `tests/ransomware/` DIRECTLY ON YOUR LOCAL MACHINE!!**. You will brick your computer and cause all your files to be encrypted! (We have provided a `keys.txt` file that will be output once the payload is run, but this is still too dangerous!!)
