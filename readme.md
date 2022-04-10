@@ -69,7 +69,7 @@ python3 main.py -h
 
 ### Signature Detector test
 
-To run tests, run:
+To run tests, make sure the path is in the correct location first for `config.yml`, then run:
 
 ```sh
 sudo python tester.py
@@ -80,12 +80,11 @@ This command will run the test in `tests/raasnet_test.py`. The test includes:
 - Setting up dummy files recursively for testing
 - Setting up the signature detector
 - Running the signature detector
+- Running the ransomware
+- Stopping the ransomware
+- Providing benchmarks
 
-A user can then manually run the ransomware to see how long before it is killed and check how far the encryption process got:
-
-```sh
-sudo python3 tests/ransomware/raasnet_payload.py
-```
+A sample run is shown below:
 
 ## ⚠ WARNING
 

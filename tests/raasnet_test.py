@@ -1,7 +1,9 @@
+from concurrent.futures import process
 import os
 import sys
 import time
 import pprint
+import signal
 import pathlib
 import shutil
 import itertools
@@ -15,13 +17,26 @@ from .test_utils.metrics import compute_ransomware_encryption_metrics
 pp = pprint.PrettyPrinter(indent=2)
 FILE_PATH = os.path.abspath(os.path.dirname(__file__))
 DETECTOR_TO_TEST = "SensoryDetector"
+detector_proc = None
+ransomware_proc = None
 
 
 def cleanup_test_folder():
     try:
         shutil.rmtree(f"{FILE_PATH}/test_folder")
     except OSError:
-        print("Test folder doesn't exist, skipping clean up of test folder")
+        print("(test) Test folder doesn't exist, skipping clean up of test folder")
+
+
+def cleanup_sigint(sig, frame):
+    print("(test) Cleaning up SIGINT")
+    os.system("sudo pkill -9 -f SensoryDetector")  # just to make sure the process is killed
+    os.system("sudo pkill -9 -f raasnet_payload")
+    sys.exit(0)
+
+
+# register signal handler
+signal.signal(signal.SIGINT, cleanup_sigint)
 
 
 def test():
@@ -48,7 +63,7 @@ def test():
 
     """3. Run the detector"""
     os.chdir(f"{FILE_PATH}/../")
-    detector_proc = subprocess.Popen(["sudo", "python3", "main.py", "-d", DETECTOR_TO_TEST], shell=False)
+    detector_proc = subprocess.Popen(["sudo", "python3", "main.py", "-d", DETECTOR_TO_TEST], stdout=subprocess.PIPE)
 
     print("(test) Sleeping a bit for ransomware detector to start up!")
     time.sleep(5)
