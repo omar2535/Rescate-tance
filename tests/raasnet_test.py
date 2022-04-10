@@ -8,6 +8,7 @@ import subprocess
 import randomfiletree
 
 from file_generator.generate_random_file_tree import generate_random_files
+from .test_utils.file_utils import get_all_files_in_directory_recursively
 
 FILE_PATH = os.path.abspath(os.path.dirname(__file__))
 DETECTOR_TO_TEST = "SensoryDetector"
@@ -27,7 +28,6 @@ def test():
     The script will perform the following steps:
 
     0. Cleanup the test_folder
-    1. Install raasnet dependencies
     2. Create a bunch of dummy folders and dummy files
     3. Run the detector (`python3 main.py -d <detector>`)
     4. Run RAASNET (`python3 tests/ransomware/raasnet_payload.py`)
@@ -37,27 +37,22 @@ def test():
     """0. Clean up test folder"""
     cleanup_test_folder()
 
-    """1. Install dependencies for raasnet"""
-    try:
-        print("(test) Installing dependencies")
-        os.system(
-            "sudo apt install iotop python3-pip python3-tk python3-pil python3-pil.imagetk libgeoip1 libgeoip-dev geoip-bin > /dev/null 2>&1"
-        )
-    except Exception:
-        print("(test) Couldn't install linux apt packages")
-
     try:
         subprocess.check_output(["pip3", "install", "-r", "requirements.txt"])
     except Exception:
         print("(test) Can't install dependencies")
 
-    """2. Create a bunch of dummy folders and dummy files"""
+    """1. Create a bunch of dummy folders and dummy files"""
     print("(test) Creating dummy files")
     randomfiletree.core.iterative_gaussian_tree(
         f"{FILE_PATH}/test_folder", nfiles=10, nfolders=5, maxdepth=3, repeat=3, payload=generate_random_files
     )
 
-    """3. Run the detector"""
+    files = get_all_files_in_directory_recursively(f"{FILE_PATH}/test_folder")
+    breakpoint()
+
+    '''
+    """2. Run the detector"""
     os.chdir(f"{FILE_PATH}/../")
     detector_proc = subprocess.Popen(["sudo", "python3", "main.py", "-d", DETECTOR_TO_TEST], shell=False)
     # os.system(f"sudo python3 main.py -d {DETECTOR_TO_TEST}")
@@ -65,10 +60,10 @@ def test():
     print("(test) Sleeping a bit for ransomware detector to start up!")
     time.sleep(5)
 
-    """4. Run the ransomware"""
+    """3. Run the ransomware"""
     ransomware_proc = subprocess.Popen(["sudo", "python3", "tests/ransomware/raasnet_payload.py"], shell=False)
 
-    """5. Wait for ransomware to be killed, or after a certain time then just kill everything"""
+    """4. Wait for ransomware to be killed, or after a certain time then just kill everything"""
     print("(test) Sleeping a bit for ransomware to be detected")
     time.sleep(10)
     if ransomware_proc.poll() is None:
@@ -80,8 +75,10 @@ def test():
     ransomware_proc.kill()
     os.system("sudo pkill -9 -f SensoryDetector")  # just to make sure the process is killed
 
-    """"6. Cleanup test folder again"""
+    """"5. Cleanup test folder again"""
     # cleanup_test_folder()
+
+    '''
 
     # find ./tests/test_folder -type f -name "*.docx"
 
