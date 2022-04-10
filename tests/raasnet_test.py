@@ -55,4 +55,8 @@ def test():
 
     """3. Run the detector"""
     os.chdir(f"{FILE_PATH}/../")
-    os.system(f"sudo python3 main.py -d {DETECTOR_TO_TEST}")
+    detector_proc = subprocess.Popen(f"sudo python3 main.py -d {DETECTOR_TO_TEST}", shell=False)
+    # os.system(f"sudo python3 main.py -d {DETECTOR_TO_TEST}")
+
+    """4. Run the ransomware"""
+    raasnet_proc = subprocess.Popen(f"sudo python3 tests/ransomware/raasnet_payload.py")

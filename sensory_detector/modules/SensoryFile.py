@@ -2,6 +2,9 @@
 
 from constants import SENSORY_FILE_CONTENTS
 from general_utils.CustomLogger import CustomLogger
+from general_utils.psutils import getPidOfProcessByName
+
+import psutil
 import os
 
 
@@ -30,7 +33,11 @@ class SensoryFile:
                 raise Exception("File was changed!")
         except Exception:
             # TODO: Change this to a handler once change is detected!
-            os.system("pkill -9 python")
+            pid = getPidOfProcessByName("raasnet_payload.py")
+            if pid:
+                print(pid)
+
+            # os.system("pkill -9 python")
             pass
 
     def create(self):
