@@ -27,10 +27,11 @@ class SensoryDetector(Detector):
 
         def shutdown(signum, frame) -> None:
             """Deletes sensor files and stops timers"""
-            for sensor_file in self.sensor_files:
-                sensor_file.delete()
             for rt in self.repeated_timers:
                 rt.stop()
+
+            for sensor_file in self.sensor_files:
+                sensor_file.delete()
 
             print("\r(-) Stopping rescate-tance sensory file detector!")
             self.logger.info("Shutting down Rescate-tance sensory detector")
@@ -42,6 +43,7 @@ class SensoryDetector(Detector):
     def run(self):
         """Creates sensor files and registers timers to check sensor files"""
 
+        print("(+) Starting up sensory detector!")
         self.logger.info("Starting up Rescate-tance sensory detector")
 
         """ Read and create file paths """
@@ -61,6 +63,8 @@ class SensoryDetector(Detector):
             check_frequency = config["frequency_to_check"]
             rt = RepeatedTimer(check_frequency, sensor_file.check)
             self.repeated_timers.append(rt)
+
+        print("(+) Sensory detector up & running!")
 
         """ Infinite loop """
         while True:
