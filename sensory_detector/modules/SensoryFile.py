@@ -2,13 +2,15 @@
 
 from constants import SENSORY_FILE_CONTENTS
 from general_utils.CustomLogger import CustomLogger
+from post_detection.handlers import post_detection_handler
 
+import logging
 import psutil
 import os
 
 
 class SensoryFile:
-    def __init__(self, file_path, logger: CustomLogger):
+    def __init__(self, file_path, logger: logging.Logger):
         self.logger = logger
         self.file_path = file_path
 
@@ -31,9 +33,8 @@ class SensoryFile:
             else:
                 raise Exception("File was changed!")
         except Exception:
-            # TODO: Change to general purpose handler (right now, only specific to RAASNET)
-            os.system("pkill -9 -f raasnet_payload.py")
-            pass
+            self.logger.warning("File was changed! Running post-detection handling!")
+            post_detection_handler()
 
     def create(self):
         """Create sensor file"""
