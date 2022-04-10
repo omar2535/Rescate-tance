@@ -57,14 +57,26 @@ python3 main.py -h
 
 ## 🧪 Tests
 
+### Signature Detector test
+
 To run tests, run:
 
 ```sh
-python tester.py
+sudo python tester.py
 ```
 
-currently, this only runs the tests in `tests/raasnet_test.py`
+This command will run the test in `tests/raasnet_test.py`. The test includes:
+
+- Setting up dummy files recursively for testing
+- Setting up the signature detector
+- Running the signature detector
+
+A user can then manually run the ransomware to see how long before it is killed and check how far the encryption process got:
+
+```sh
+sudo python3 tests/ransomware/raasnet_payload.py
+```
 
 ## ⚠ WARNING
 
-**DO NOT RUN THE PAYLOADS IN `tests/ransomware/` DIRECTLY!!**. You will brick your computer and cause all your files to be encrypted!
+**DO NOT RUN THE PAYLOADS IN `tests/ransomware/` DIRECTLY ON YOUR LOCAL MACHINE!!**. You will brick your computer and cause all your files to be encrypted! (We have provided a `keys.txt` file that will be output once the payload is run, but this is still too dangerous!!)
