@@ -5,7 +5,6 @@ from typing import List
 from detectors.SensoryDetector import SensoryDetector
 from constants import DESCRIPTION
 from detectors import available_detectors
-from post_detection.terminator import terminate
 
 """Get list of detectors"""
 list_of_detectors: List[str] = list(available_detectors.keys())
