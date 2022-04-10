@@ -18,3 +18,5 @@ exclude =
     dist,
     # Ransomware directory
     tests/ransomware
+    # Tests directory
+    tests/

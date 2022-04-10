@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import pprint
 import pathlib
 import shutil
 import itertools
@@ -9,7 +10,9 @@ import randomfiletree
 
 from file_generator.generate_random_file_tree import generate_random_files
 from .test_utils.file_utils import get_all_files_in_directory_recursively
+from .test_utils.metrics import compute_ransomware_encryption_metrics
 
+pp = pprint.PrettyPrinter(indent=4)
 FILE_PATH = os.path.abspath(os.path.dirname(__file__))
 DETECTOR_TO_TEST = "SensoryDetector"
 
@@ -48,11 +51,10 @@ def test():
         f"{FILE_PATH}/test_folder", nfiles=10, nfolders=5, maxdepth=3, repeat=3, payload=generate_random_files
     )
 
-    files = get_all_files_in_directory_recursively(f"{FILE_PATH}/test_folder")
-    breakpoint()
+    """2. Keep track of original files that were created in test_folder"""
+    original_files = get_all_files_in_directory_recursively(f"{FILE_PATH}/test_folder")
 
-    '''
-    """2. Run the detector"""
+    """3. Run the detector"""
     os.chdir(f"{FILE_PATH}/../")
     detector_proc = subprocess.Popen(["sudo", "python3", "main.py", "-d", DETECTOR_TO_TEST], shell=False)
     # os.system(f"sudo python3 main.py -d {DETECTOR_TO_TEST}")
@@ -60,10 +62,10 @@ def test():
     print("(test) Sleeping a bit for ransomware detector to start up!")
     time.sleep(5)
 
-    """3. Run the ransomware"""
+    """4. Run the ransomware"""
     ransomware_proc = subprocess.Popen(["sudo", "python3", "tests/ransomware/raasnet_payload.py"], shell=False)
 
-    """4. Wait for ransomware to be killed, or after a certain time then just kill everything"""
+    """5. Wait for ransomware to be killed, or after a certain time then just kill everything"""
     print("(test) Sleeping a bit for ransomware to be detected")
     time.sleep(10)
     if ransomware_proc.poll() is None:
@@ -75,12 +77,10 @@ def test():
     ransomware_proc.kill()
     os.system("sudo pkill -9 -f SensoryDetector")  # just to make sure the process is killed
 
+    """6: Get files after ransomware hit and check percentage encrypted"""
+    after_ransomware_files = get_all_files_in_directory_recursively(f"{FILE_PATH}/test_folder")
+    metrics = compute_ransomware_encryption_metrics(original_files, after_ransomware_files)
+    pp.pprint(metrics)
+
     """"5. Cleanup test folder again"""
-    # cleanup_test_folder()
-
-    '''
-
-    # find ./tests/test_folder -type f -name "*.docx"
-
-    # TODO: Kill detector & ransomware only so we can keep metrics in this script
-    # Generate a file tree of previous, then for each file in previous file tree, check percentage of encryption
+    cleanup_test_folder()
