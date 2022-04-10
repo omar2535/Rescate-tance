@@ -38,7 +38,8 @@ class SensoryFile:
     def create(self):
         """Create sensor file"""
         try:
-            with open(f"{self.file_path}", "x") as f:
+            os.umask(0)
+            with open(os.open(f"{self.file_path}", os.O_CREAT | os.O_WRONLY, 0o777), "x") as f:
                 f.write(SENSORY_FILE_CONTENTS)
                 f.close()
             self.logger.info(f"Sensory file {self.file_path} created")
