@@ -79,7 +79,7 @@ python3 main.py -h
 To run tests, make sure the path is in the correct location first for `config.yml`, then run:
 
 ```sh
-sudo python tester.py
+sudo python3 tester.py
 ```
 
 This command will run the test in `tests/raasnet_test.py`. The test includes:
