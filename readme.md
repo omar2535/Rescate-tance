@@ -2,8 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/6de634a20ef1f5e51810/maintainability)](https://codeclimate.com/github/omar2535/Rescate-tance/maintainability)
 [![Lint](https://github.com/omar2535/Rescate-tance/actions/workflows/lint.yaml/badge.svg)](https://github.com/omar2535/Rescate-tance/actions/workflows/lint.yaml)
-
-
+![Known Vulnerabilities](https://snyk.io/test/github/omar2535/Rescate-tance/badge.svg)
 
 A POC ransomware detector for CMPT733 project
 
