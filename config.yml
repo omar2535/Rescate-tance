@@ -1,4 +1,4 @@
 # For the sensory detector
 directories_to_check:
-  - /home/omar2535/school/Rescate-tance/tests/test_folder
+  - /home/
 frequency_to_check: 1 # in seconds
