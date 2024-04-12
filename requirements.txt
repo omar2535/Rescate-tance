@@ -1,6 +1,6 @@
 certifi==2023.7.22
 charset-normalizer==2.0.12
-idna==3.3
+idna==3.7
 numpy==1.22.3
 pandas==1.4.1
 pathlib==1.0.1
